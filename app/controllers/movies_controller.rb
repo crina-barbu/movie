@@ -16,6 +16,29 @@ class MoviesController < ApplicationController
       else
           @movies = Movie.all
       end
+      @all_ratings = Movie.get_ratings
+      @rate = Hash.new
+      for i in 0..@all_ratings.length-1 do
+        @rate[@all_ratings[i]] = false
+      end
+      
+      if params[:ratings]
+        @i = 0
+        @k = 0
+        @aux = Array.new
+        @checked_ratings = params[:ratings]
+        @checked_ratings.each do |r, v|
+          mov = Movie.all(:conditions => "rating = '#{r}'")
+          mov.each do |m|
+            @aux[@i] = m
+            @i +=1
+          end
+          @rate[r] = true
+        end
+        @movies = @aux
+        
+        @k += 1
+      end
   end
 
   def new
