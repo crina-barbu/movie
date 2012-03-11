@@ -1,0 +1,7 @@
+Tue, 06 Mar 2012 22:11:47 +0200
+doc/README_FOR_APP	Tue, 06 Mar 2012 21:26:06 +0200
+app/controllers/application_controller.rb	Tue, 06 Mar 2012 21:26:05 +0200
+app/controllers/movies_controller.rb	Tue, 06 Mar 2012 21:26:05 +0200
+app/helpers/movies_helper.rb	Tue, 06 Mar 2012 21:26:05 +0200
+app/helpers/application_helper.rb	Tue, 06 Mar 2012 21:26:05 +0200
+app/models/movie.rb	Tue, 06 Mar 2012 21:26:05 +0200

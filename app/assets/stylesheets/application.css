@@ -52,6 +52,7 @@ table#movies th, table#movies td {
   background: rosybrown;
   margin: 1em 0;
   padding: 4px;
+  
 }
 form label {
   display: block;
@@ -59,3 +60,8 @@ form label {
   font-weight: bold;
   color: maroon;
 }
+
+table#movies th.hilite {
+  background-color: yellow;
+}
+
