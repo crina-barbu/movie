@@ -7,26 +7,18 @@ class MoviesController < ApplicationController
   end
 
   def index
-      if params.has_value?('title')
-          @movies = Movie.all(:order => 'title')
-          @sort = 'title'
-      elsif params.has_value?('date')
-          @movies = Movie.all(:order => 'release_date')
-          @sort = 'date'
-      else
-          @movies = Movie.all
-      end
       @all_ratings = Movie.get_ratings
       @rate = Hash.new
       for i in 0..@all_ratings.length-1 do
         @rate[@all_ratings[i]] = false
       end
-      
       if params[:ratings]
+          session[:ratings] = params[:ratings]
+      end
+      if session[:ratings]
         @i = 0
-        @k = 0
         @aux = Array.new
-        @checked_ratings = params[:ratings]
+        @checked_ratings = session[:ratings]
         @checked_ratings.each do |r, v|
           mov = Movie.all(:conditions => "rating = '#{r}'")
           mov.each do |m|
@@ -36,8 +28,21 @@ class MoviesController < ApplicationController
           @rate[r] = true
         end
         @movies = @aux
-        
-        @k += 1
+      else
+        @movies = Movie.all
+      end
+      if params.has_value?('title')
+         session[:sort] = 'title'
+      end
+      if params.has_value?('date')
+          session[:sort] = 'date'
+      end
+      if session[:sort] == 'title'
+            @movies.sort! { |a,b| a.title.downcase <=> b.title.downcase }
+            @sort = 'title'
+      elsif session[:sort] == 'date'
+            @movies.sort! { |a,b| a.rating.downcase <=> b.rating.downcase }
+            @sort = 'date'
       end
   end
 
